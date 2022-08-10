@@ -16,11 +16,12 @@ const Comment = async ()=>{
     await page.waitForTimeout(35000)
     await page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
     let temp = []
-    for(let x = 30000 ; x < 60000; x++){
+    for(let x = 23000 ; x < 60000; x++){
         temp.push(x)
     }
 
     for(let x = 0 ; x < 10000; x++){
+        for(let j = 0 ; x < 1; x++){
         console.log(x)
         let tempo = temp[Math.floor(Math.random() * temp.length)]
         await page.waitForSelector('[aria-label="Adicione um comentário..."]')
@@ -30,6 +31,15 @@ const Comment = async ()=>{
         await page.waitForSelector('[type="submit"]')
         await page.click('[type="submit"]')
         await page.waitForTimeout(5000)
+        }
+
+        page.goto("https://www.instagram.com/")
+        await page.evaluate(()=>{
+           return document.querySelectorAll('[class="_aarh"]')[0].click()
+        })
+        await page.waitForTimeout(23000)
+        await page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
+
     }
     
 }
