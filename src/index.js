@@ -16,28 +16,33 @@ const Comment = async ()=>{
     await page.waitForTimeout(35000)
     await page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
     let temp = []
-    for(let x = 23000 ; x < 60000; x++){
+    for(let x = 1000 ; x < 10000; x++){
         temp.push(x)
     }
-
+    let tempo = temp[Math.floor(Math.random() * temp.length)]
     for(let x = 0 ; x < 10000; x++){
         for(let j = 0 ; x < 1; x++){
         console.log(x)
-        let tempo = temp[Math.floor(Math.random() * temp.length)]
+        
         await page.waitForSelector('[aria-label="Adicione um comentário..."]')
-        await page.type('[aria-label="Adicione um comentário..."]', `Vamo la ganha ${x} ` + marc1[Math.floor(Math.random() * marc1.length)])
+        await page.type('[aria-label="Adicione um comentário..."]', `ganhando R$ ${x} ` + marc1[Math.floor(Math.random() * marc1.length)])
         console.log("tempo sorteado " + tempo)
         await page.waitForTimeout(tempo)
         await page.waitForSelector('[type="submit"]')
         await page.click('[type="submit"]')
         await page.waitForTimeout(5000)
         }
-
         page.goto("https://www.instagram.com/")
+        await page.waitForTimeout(10000)
+        if(page.waitForSelector('[class="_a9-- _a9_1"]')){
+            await page.click('[class="_a9-- _a9_1"]')
+        }
         await page.evaluate(()=>{
-           return document.querySelectorAll('[class="_aarh"]')[0].click()
+           document.querySelectorAll('[class="_aarh"]')[1].click()
         })
         await page.waitForTimeout(23000)
+        await page.waitForSelector('[aria-label="Fechar"]')
+        await page.click('[aria-label="Fechar"]')
         await page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
 
     }
