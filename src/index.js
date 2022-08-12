@@ -34,15 +34,25 @@ const Comment = async ()=>{
         }
         page.goto("https://www.instagram.com/")
         await page.waitForTimeout(10000)
-        if(page.waitForSelector('[class="_a9-- _a9_1"]')){
+        
+        try {
+            await page.waitForSelector('[class="_a9-- _a9_1"]')
             await page.click('[class="_a9-- _a9_1"]')
+            await page.evaluate(()=>{
+                document.querySelectorAll('[class="_aarh"]')[1].click()
+            })
+        } catch (error) {
+            await page.evaluate(()=>{
+                document.querySelectorAll('[class="_aarh"]')[1].click()
+            })
         }
-        await page.evaluate(()=>{
-           document.querySelectorAll('[class="_aarh"]')[1].click()
-        })
-        await page.waitForTimeout(23000)
+
+        await page.waitForTimeout(2300)
         await page.waitForSelector('[aria-label="Fechar"]')
         await page.click('[aria-label="Fechar"]')
+        await page.waitForSelector('[class="_aaav"]')
+        await page.click('[class="_aaav"]')
+        page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
         await page.goto("https://www.instagram.com/p/Cg2XTNuBNjG/")
 
     }
